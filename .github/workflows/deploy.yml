@@ -9,10 +9,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
       - name: Authenticate to GCP
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Docker configuration
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev
+
       - name: Build and Push Docker Image
         run: |
           docker build -t us-central1-docker.pkg.dev/stock-web-485703/stock-repo/stock-api:latest .
