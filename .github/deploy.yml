@@ -1,0 +1,19 @@
+# A simplified example of what this looks like
+name: Deploy to Google Cloud
+on:
+  push:
+    branches: [ dev ]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t us-central1-docker.pkg.dev/project/repo/image:latest .
+          docker push us-central1-docker.pkg.dev/project/repo/image:latest
