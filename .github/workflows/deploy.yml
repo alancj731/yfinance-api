@@ -1,22 +1,24 @@
-# A simplified example of what this looks like
 name: Deploy to Google Cloud
 on:
   push:
-    branches: [ dev ]
+    branches: [ dev ]  # Ensure you are pushing to the 'dev' branch!
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Authenticate to GCP
-        uses: google-github-actions/auth@v1
+        uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-      - name: Set up Docker configuration
-        run: gcloud auth configure-docker us-central1-docker.pkg.dev
+      # THIS IS THE CRITICAL MISSING LINK:
+      - name: Configure Docker for Google Cloud
+        run: |
+          gcloud auth configure-docker us-central1-docker.pkg.dev
 
       - name: Build and Push Docker Image
         run: |
