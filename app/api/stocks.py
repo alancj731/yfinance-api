@@ -7,7 +7,7 @@ from app.utils.security import validate_api_key
 router = APIRouter()
 
 @router.get("/{ticker}", response_model=StockResponse)
-@limiter.limit("1/second")
+@limiter.limit("30/minute")
 async def get_stock(request: Request, ticker: str, api_key: str = Depends(validate_api_key), period: str = Query("5y", regex="^(1d|5d|1mo|1y|5y|max)$")):
     data = fetch_stock_history(ticker.upper(), period)
     return {
