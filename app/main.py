@@ -5,6 +5,7 @@ from slowapi.errors import RateLimitExceeded
 from app.api import stocks
 from app.utils.limiter import limiter
 
+
 # 1. Initialize the limiter (identifies users by their IP address)
 app = FastAPI(title="Stock History API")
 

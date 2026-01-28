@@ -76,3 +76,6 @@ ehthumbs.db
 Icon?
 Desktop.ini
 __MACOSX/
+
+# env
+.env

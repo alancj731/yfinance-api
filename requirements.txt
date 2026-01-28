@@ -3,5 +3,6 @@ slowapi
 yfinance
 pandas
 pydantic
+python-dotenv
 lxml
 cryptography
