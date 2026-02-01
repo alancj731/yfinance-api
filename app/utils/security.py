@@ -5,8 +5,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# We tell FastAPI to look for 'X-API-KEY' in the request headers
-API_KEY_NAME = "X-API-KEY"
+# We tell FastAPI to look for 'api-key' in the request headers
+API_KEY_NAME = "api-key"
 api_key_header = APIKeyHeader(name=API_KEY_NAME, auto_error=False)
 
 # Get the secret from environment variables
